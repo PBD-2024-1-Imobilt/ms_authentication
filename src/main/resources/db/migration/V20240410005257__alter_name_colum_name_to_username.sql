@@ -1,0 +1,1 @@
+ALTER TABLE user_client RENAME COLUMN name to username;
