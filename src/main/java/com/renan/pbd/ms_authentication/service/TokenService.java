@@ -25,7 +25,6 @@ public class TokenService {
                     .withIssuer("ms_authentication")
                     .withSubject(userModel.getUsername())
                     .withExpiresAt(genExpirationDate())
-
                     .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("Error while generate token");
