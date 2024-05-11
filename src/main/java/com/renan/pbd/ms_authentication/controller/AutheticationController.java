@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vi/authentication")
@@ -41,9 +42,9 @@ public class AutheticationController {
         if (tokenReq.token() != null){
             var username = tokenService.valueDateToken(tokenReq.token());
 
-            UserDetails user = userService.findByNameService(username);
+            Optional<UserDetails> user = userService.findByNameService(username);
 
-            if (user != null)
+            if (user.isPresent())
                 return ResponseEntity.ok(Collections.emptyMap());
             
                 
