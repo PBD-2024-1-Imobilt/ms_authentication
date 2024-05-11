@@ -9,14 +9,16 @@ import com.renan.pbd.ms_authentication.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class AutorizationService implements UserDetailsService {
     private final UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        UserDetails user = userRepository.findByUsername(name);
-        if (user != null) return user;
+        Optional<UserDetails> user = userRepository.findByUsername(name);
+        if (user.isPresent()) return user.get();
 
         throw new UsernameNotFoundException("User not found !");
     }

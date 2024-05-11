@@ -3,20 +3,18 @@ package com.renan.pbd.ms_authentication.model;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.persistence.*;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "user_client")
 @Getter
+@Setter
 @NoArgsConstructor
 public class UserModel implements UserDetails {
     @Id

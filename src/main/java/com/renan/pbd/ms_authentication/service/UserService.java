@@ -11,6 +11,8 @@ import com.renan.pbd.ms_authentication.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -27,7 +29,7 @@ public class UserService {
         return authenticationManager.authenticate(userNamePassword);
     }
 
-    public UserDetails findByNameService(String name) {
+    public Optional<UserDetails> findByNameService(String name) {
         return userRepository.findByUsername(name);
     }
 
