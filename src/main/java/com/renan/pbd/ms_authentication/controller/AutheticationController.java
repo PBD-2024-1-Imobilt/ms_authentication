@@ -8,6 +8,7 @@ import com.renan.pbd.ms_authentication.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,15 +30,15 @@ public class AutheticationController {
     @PostMapping("/token")
     public ResponseEntity<TokenRequestResponseDto> postCreateToken(@RequestBody @Valid UserRequestDto userDate){
 
-        var authUser = userService.authenticateUserService(userDate);
+        UserModel authUser = (UserModel) userService.authenticateUserService(userDate).getPrincipal();
 
-        var token = tokenService.generateToken((UserModel) authUser.getPrincipal());
+        String token = tokenService.generateToken(authUser);
 
         return ResponseEntity.ok(new TokenRequestResponseDto(token));
     }
 
     @PostMapping("/validation")
-    public ResponseEntity<?> postValidateToken(
+    public ResponseEntity<Object> postValidateToken(
             @RequestBody @Valid TokenRequestResponseDto tokenReq){
         if (tokenReq.token() != null){
             var username = tokenService.valueDateToken(tokenReq.token());
