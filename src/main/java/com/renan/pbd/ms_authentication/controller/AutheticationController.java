@@ -7,6 +7,7 @@ import com.renan.pbd.ms_authentication.service.TokenService;
 import com.renan.pbd.ms_authentication.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
