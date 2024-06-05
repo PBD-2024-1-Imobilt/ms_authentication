@@ -8,6 +8,7 @@ import com.renan.pbd.ms_authentication.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,12 +22,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/vi/authentication")
-@AllArgsConstructor
 public class AutheticationController {
 
-    private final UserService userService;
-
-    private final TokenService tokenService;
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private  TokenService tokenService;
 
     @PostMapping("/token")
     public ResponseEntity<TokenRequestResponseDto> postCreateToken(@RequestBody @Valid UserRequestDto userDate){

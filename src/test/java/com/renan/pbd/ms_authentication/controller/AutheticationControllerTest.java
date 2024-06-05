@@ -51,7 +51,6 @@ class AutheticationControllerTest {
         username = user.getUsername();
         optionalUser = Optional.of(user);
         token = "teste646554654646.5464654.564465";
-        autheticationController = new AutheticationController(userService, tokenService);
     }
 
     @Test
