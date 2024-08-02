@@ -1,24 +1,24 @@
 package com.renan.pbd.ms_authentication.controller;
 
-import com.renan.pbd.ms_authentication.dto.TokenRequestResponseDto;
-import com.renan.pbd.ms_authentication.dto.UserRequestDto;
-import com.renan.pbd.ms_authentication.model.UserModel;
-import com.renan.pbd.ms_authentication.service.TokenService;
-import com.renan.pbd.ms_authentication.service.UserService;
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
+import java.util.Collections;
+import java.util.Optional;
+
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
-import java.util.Optional;
+import com.renan.pbd.ms_authentication.dto.TokenRequestResponseDto;
+import com.renan.pbd.ms_authentication.dto.UserRequestDto;
+import com.renan.pbd.ms_authentication.model.UserModel;
+import com.renan.pbd.ms_authentication.service.TokenService;
+import com.renan.pbd.ms_authentication.service.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/vi/authentication")
@@ -30,6 +30,9 @@ public class AutheticationController {
     @Autowired
     private  TokenService tokenService;
 
+    @Operation(summary = "Create Token",
+            description = "Create the token by passing the login and password as parameters.",
+    tags = "Token")
     @PostMapping("/token")
     public ResponseEntity<TokenRequestResponseDto> postCreateToken(@RequestBody @Valid UserRequestDto userDate){
 
@@ -40,6 +43,9 @@ public class AutheticationController {
         return ResponseEntity.ok(new TokenRequestResponseDto(token));
     }
 
+    @Operation(summary = "Validate Token",
+            description = "Method to validate token.",
+            tags = "Token")
     @PostMapping("/validation")
     public ResponseEntity<Object> postValidateToken(
             @RequestBody @Valid TokenRequestResponseDto tokenReq){
